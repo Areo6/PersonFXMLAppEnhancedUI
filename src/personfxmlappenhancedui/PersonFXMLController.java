@@ -46,7 +46,7 @@ public class PersonFXMLController implements Initializable {
     @FXML
     private TextField suffixTextField;
     @FXML
-    private TreeView<?> personTreView;
+    private TreeView<Person> personTreView;
     @FXML
     private TextArea notesTextArea;
     @FXML
@@ -117,7 +117,7 @@ public class PersonFXMLController implements Initializable {
         buildTreeView(rootNode);
         personTreView.setRoot(rootNode);
         personTreView.getRoot().setExpanded(true);
-        personTreView.getSelectionModel().selectedItemProperty().addListener();
+        personTreView.getSelectionModel().selectedItemProperty().addListener(treeSelectionListener);
                      
     
     }    
