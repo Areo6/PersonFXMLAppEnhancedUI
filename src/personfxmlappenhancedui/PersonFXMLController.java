@@ -122,10 +122,10 @@ public class PersonFXMLController implements Initializable {
     
     }    
      private void buildData() {
-        ftm.addPerson(new Person("Homer", "Simpson", Person.Gender.MALE));
-        ftm.addPerson(new Person("Marge", "Simpson", Person.Gender.FEMALE));
-        ftm.addPerson(new Person("Bart", "Simpson", Person.Gender.MALE));
-        ftm.addPerson(new Person("Lisa", "Simpson", Person.Gender.FEMALE));
+        ftm.addPerson(new Person("Malaba", "Mashauri", Person.Gender.MALE));
+        ftm.addPerson(new Person("Liz", "Mashauri", Person.Gender.FEMALE));
+        ftm.addPerson(new Person("Allan", "Mashauri", Person.Gender.MALE));
+        ftm.addPerson(new Person("Sasha", "Simpson", Person.Gender.FEMALE));
         ftm.addPerson(new Person("Maggie", "Simpson", Person.Gender.FEMALE));
         logger.log(Level.FINE, ftm.getAllPeople().toString());
     }
