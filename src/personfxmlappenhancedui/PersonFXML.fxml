@@ -20,7 +20,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="328.0" prefWidth="257.0">
                <children>
-                  <TreeView fx:id="personTreeView" layoutX="23.0" layoutY="23.0" prefHeight="289.0" prefWidth="225.0" scaleZ="0.0">
+                  <TreeView fx:id="personTreView" layoutX="23.0" layoutY="23.0" prefHeight="289.0" prefWidth="225.0" scaleZ="0.0">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
