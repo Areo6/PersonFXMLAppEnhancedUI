@@ -24,6 +24,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
+import javafx.application.Platform;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -89,7 +90,7 @@ public class PersonFXMLController implements Initializable {
 
         enableUpdateProperty = new SimpleBooleanProperty(
                   this, "enableUpdate", false);
-        updateButton.disableProperty().bind(enableUpdateProperty.not());
+        //updateButton.disableProperty().bind(enableUpdateProperty.not());
 
         // the radio button custom binding
         genderBinding = new ObjectBinding<Person.Gender>() {
@@ -131,9 +132,9 @@ public class PersonFXMLController implements Initializable {
     }
 
     private void buildTreeView(TreeItem<Person> root) {
-        // listen for changes to the familytreemanager's map
+        
         ftm.addListener(familyTreeListener);
-        // Populate the TreeView control
+        
         ftm.getAllPeople().stream().forEach((p) -> {
             root.getChildren().add(new TreeItem<>(p));
         });
@@ -148,11 +149,11 @@ public class PersonFXMLController implements Initializable {
             clearForm();
             return;
         }
-        // set thePerson to the selected treeItem value
+       
         thePerson = new Person(treeItem.getValue());
         logger.log(Level.FINE, "selected person = {0}", thePerson);
         configureEditPanelBindings(thePerson);
-        // set the gender from Person, then configure the genderBinding
+        
         switch (thePerson.getGender()) {
             case MALE:
                 maleRadioButton.setSelected(true);
@@ -209,12 +210,21 @@ public class PersonFXMLController implements Initializable {
     }
       private final MapChangeListener<Long, Person> familyTreeListener =
                                           (change) -> {
-      if (change.getValueAdded() != null) {
-         logger.log(Level.FINE, "changed value = {0}", change.getValueAdded());
-         // Find the treeitem that this matches and replace it
+      if (Platform.isFxApplicationThread()) {
+         logger.log(Level.FINE, "is JavaFX Application Thread");
+         updateTree(change);
+      }else {
+            logger.log(Level.FINE, "Is BACKGROUND Thread");
+            Platform.runLater(()-> updateTree(change));
+            }
+        };
+          private void updateTree(MapChangeListener.Change<? extends Long,
+                                          ? extends Person> change) {
+        if (change.getValueAdded() != null) {
+            
          for (TreeItem<Person> node : personTreView.getRoot().getChildren()) {
             if (change.getKey().equals(node.getValue().getId())) {
-               // an update returns the new value in getValueAdded()
+               
                node.setValue(change.getValueAdded());
                return;
             }
