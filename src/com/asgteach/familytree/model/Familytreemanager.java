@@ -53,8 +53,8 @@ public class Familytreemanager {
     }
     public List<Person> getAllPeople(){
           List<Person> copyList = new ArrayList<>();
-         map.values().stream().forEach((p) ->
-            copyList.add(new Person(p)));
+         map.values().stream().forEach((p) -> copyList.add(new Person(p)));
+            
         return copyList;
     }
 }
