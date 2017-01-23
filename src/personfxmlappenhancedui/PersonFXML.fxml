@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ToggleGroup?>
 
 <AnchorPane id="AnchorPane" prefHeight="328.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="personfxmlappenhancedui.PersonFXMLController">
    <children>
@@ -18,7 +19,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="328.0" prefWidth="257.0">
                <children>
-                  <TreeView fx:id="personTreView" editable="true" layoutX="23.0" layoutY="23.0" prefHeight="289.0" prefWidth="225.0"/>
+                  <TreeView fx:id="personTreView" editable="true" layoutX="23.0" layoutY="23.0" prefHeight="289.0" prefWidth="225.0" />
                     
                </children>
             </AnchorPane>
@@ -35,26 +36,30 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="439.0" spacing="5.0">
                            <children>
                               <Label text="Middle" />
-                              <TextField fx:id="middlenanmeTextField" alignment="CENTER_RIGHT" prefWidth="248.0" />
+                              <TextField fx:id="middlenameTextField" onKeyReleased="#handleKeyAction"  prefWidth="248.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="292.0" spacing="5.0">
                            <children>
                               <Label text="Last" />
-                              <TextField fx:id="lastnameTextField" prefWidth="248.0" />
+                              <TextField fx:id="lastnameTextField" onKeyReleased="#handleKeyAction"  prefWidth="248.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="292.0" spacing="5.0">
                            <children>
                               <Label text="Suffix" />
-                              <TextField fx:id="suffixTextField" prefWidth="248.0" />
+                              <TextField fx:id="suffixTextField" onKeyReleased="#handleKeyAction"  prefWidth="248.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="38.0" prefWidth="292.0" spacing="10.0">
                            <children>
-                              <RadioButton fx:id="maleRadioButton" mnemonicParsing="false" text="Male" />
-                              <RadioButton fx:id="femaleRadioButton" mnemonicParsing="false" text="female" />
-                              <RadioButton fx:id="unknownRadioButton" mnemonicParsing="false" text="Unknown" />
+                              <RadioButton fx:id="maleRadioButton" mnemonicParsing="false"   onAction="#genderSelectionAction" text="Male" >
+                               <toggleGroup>
+                                 <ToggleGroup fx:id="genderToggleGroup"/>
+                               </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="femaleRadioButton"   onAction="#genderSelectionAction" toggleGroup="$genderToggleGroup" mnemonicParsing="false" text="female" />
+                              <RadioButton fx:id="unknownRadioButton" onAction="#genderSelectionAction" toggleGroup="$genderToggleGroup" mnemonicParsing="false" text="Unknown" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="292.0" spacing="20.0">
